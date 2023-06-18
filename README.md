@@ -9,13 +9,14 @@ The dataset can be found at the following link: Face Expression Recognition Data
 
 The dataset consists of images labeled with seven different facial expressions, including:
 
-Angry
-Disgust
-Fear
-Happy
-Sad
-Surprise
-Neutral
+Angry,
+Disgust,
+Fear,
+Happy,
+Sad,
+Surprise,
+Neutral.
+
 These images were used to train and validate the CNN model for emotion detection.
 # System Overview
 The system's workflow for emotion detection can be summarized as follows:
