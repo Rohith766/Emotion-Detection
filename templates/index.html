@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Detection</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 5in;
+            height: 5in;
+            border: 2px solid black;
+            margin-bottom: 20px;
+        }
+
+        #video-feed {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        #expression-text {
+            text-align: center;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="video-container">
+            <img id="video-feed" src="{{ url_for('video_feed') }}" alt="Video Feed">
+        </div>
+        <div id="expression-text">
+            {% if data %}
+                <p>Detected Expression: {{ data }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('connect', function() {
+            socket.emit('start_detection');
+        });
+    </script>
+</body>
+</html>
