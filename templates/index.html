@@ -35,7 +35,7 @@
 <body>
     <div class="container">
         <div class="video-container">
-            <img id="video-feed" src="{{ url_for('video_feed') }}" alt="Video Feed">
+            <video id="video-feed" autoplay></video>
         </div>
         <div id="expression-text">
             {% if data %}
@@ -49,6 +49,24 @@
         socket.on('connect', function() {
             socket.emit('start_detection');
         });
+
+        // Get the video element
+        var videoElement = document.getElementById('video-feed');
+
+        // Check if the browser supports accessing the camera
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Access the camera
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    // Set the stream as the source of the video element
+                    videoElement.srcObject = stream;
+                })
+                .catch(function(error) {
+                    console.error('Error accessing camera:', error);
+                });
+        } else {
+            console.error('Browser does not support camera access');
+        }
     </script>
 </body>
 </html>
