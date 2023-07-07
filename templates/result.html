@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Detection Result</title>
+    <style>
+        #container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #result-image {
+            max-width: 300px;
+            max-height: 300px;
+        }
+        #upload-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        #upload-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Emotion Detection Result</h1>
+        <img id="result-image" src="{{ url_for('static', filename='result.jpg') }}" alt="Result">
+        <form action="/" method="get">
+            <button id="upload-button" type="submit">Upload Image Again</button>
+        </form>
+    </div>
+</body>
+</html>
