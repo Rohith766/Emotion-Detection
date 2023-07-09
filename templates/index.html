@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Detection</title>
+    <style>
+        #container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #upload-box {
+            border: 2px dashed #aaa;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            width: 300px;
+            height: 300px;
+            transition: border-color 0.3s ease-in-out;
+        }
+        #upload-box:hover {
+            border-color: #4CAF50;
+        }
+        #upload-box input[type="file"] {
+            display: none;
+        }
+        #browse-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        #browse-button:hover {
+            background-color: #45a049;
+        }
+        #predict-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        #predict-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Emotion Detection</h1>
+        <div id="upload-box" onclick="document.getElementById('image-input').click();">
+            <input type="file" name="image" id="image-input" accept="image/*" required style="display: none;">
+            <canvas id="canvas" width="300" height="300"></canvas>
+        </div>
+        <br>
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" id="hidden-input" required style="display: none;">
+            <label for="hidden-input" id="browse-button">Browse</label>
+            <input type="submit" value="Predict" id="predict-button">
+        </form>
+    </div>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+
+        function handleImageSelect(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const image = new Image();
+                image.src = e.target.result;
+
+                image.onload = function () {
+                    const scale = Math.min(canvas.width / this.width, canvas.height / this.height);
+                    const x = (canvas.width / 2) - (this.width / 2) * scale;
+                    const y = (canvas.height / 2) - (this.height / 2) * scale;
+
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                    context.drawImage(this, x, y, this.width * scale, this.height * scale);
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+
+        document.getElementById('hidden-input').addEventListener('change', handleImageSelect);
+    </script>
+</body>
+</html>

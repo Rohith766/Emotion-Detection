@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Detection Result</title>
+    <style>
+        body {
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #result-image {
+            width: 300px;
+            height: 400px;
+            object-fit: contain;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        #predicted-expression {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+        #emoji {
+            font-size: 40px;
+            margin-top: 10px;
+        }
+        #upload-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        #upload-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Emotion Detection Result</h1>
+        <img id="result-image" src="{{ url_for('static', filename='result.jpg') }}" alt="Result">
+        <p id="predicted-expression">
+            {% if predicted_expression == 'No Expression Detected' %}
+                {{ predicted_expression }} <span id="emoji">😅</span>
+            {% else %}
+                {{ predicted_expression }}
+                {% if predicted_expression == 'happy' %}
+                    <span id="emoji">😊</span>
+                {% elif predicted_expression == 'sad' %}
+                    <span id="emoji">😢</span>
+                {% elif predicted_expression == 'angry' %}
+                    <span id="emoji">😡</span>
+                {% elif predicted_expression == 'surprise' %}
+                    <span id="emoji">😮</span>
+                {% elif predicted_expression == 'fear' %}
+                    <span id="emoji">😨</span>
+                {% elif predicted_expression == 'disgust' %}
+                    <span id="emoji">🤢</span>
+                {% else %}
+                    <span id="emoji">😐</span>
+                {% endif %}
+            {% endif %}
+        </p>
+        <form action="/" method="get">
+            <button id="upload-button" type="submit">Upload Image Again</button>
+        </form>
+    </div>
+</body>
+</html>
