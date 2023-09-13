@@ -1,5 +1,5 @@
 # Emotion-Detection
-This project aims to detect the emotion of a person in real-time using Convolutional Neural Networks (CNN) and computer vision techniques. The developed system utilizes the Haar cascade frontal face detection algorithm to detect faces in images and then predicts the emotion associated with each detected face.
+This project aims to detect the emotion of a person in real-time using Convolutional Neural Networks (CNN) and computer vision techniques. The developed system utilizes the Haar cascade frontal face detection algorithm to detect faces in images and then predicts the emotion associated with each detected face. Website link https://faceexpressiondetection.azurewebsites.net/
 
 ![image](https://github.com/Rohith766/Emotion-Detection/assets/92597090/4c9c309b-2793-4ae5-a23b-9a15cbca86a8)
  
